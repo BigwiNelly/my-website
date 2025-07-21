@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nelly Ishimwe - Computer Science Student & Developer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(20, 25, 47, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 0;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        background: rgba(20, 25, 47, 0.98);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #64ffda;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover {
+        color: #64ffda;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        background: linear-gradient(
+          135deg,
+          #141929 0%,
+          #1a1f3a 50%,
+          #2d1b69 100%
+        );
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff08" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: slideInLeft 1s ease forwards 0.3s;
+      }
+
+      .hero-text .subtitle {
+        font-size: 1.3rem;
+        color: #64ffda;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: slideInLeft 1s ease forwards 0.5s;
+      }
+
+      .hero-text p {
+        font-size: 1.1rem;
+        color: #a0a9c0;
+        margin-bottom: 3rem;
+        opacity: 0;
+        animation: slideInLeft 1s ease forwards 0.7s;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        opacity: 0;
+        animation: slideInLeft 1s ease forwards 0.9s;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #64ffda, #00bcd4);
+        color: #141929;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: #64ffda;
+        border: 2px solid #64ffda;
+      }
+
+      .btn-secondary:hover {
+        background: #64ffda;
+        color: #141929;
+        transform: translateY(-2px);
+      }
+
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        animation: slideInRight 1s ease forwards 0.5s;
+      }
+
+      .floating-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      /* Section Styles */
+      section {
+        padding: 5rem 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        color: #141929;
+        margin-bottom: 1rem;
+      }
+
+      .section-title p {
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      /* About Section */
+      .about {
+        background: #f8fafc;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        color: #666;
+        line-height: 1.8;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #64ffda;
+      }
+
+      /* Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .skill-category {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .skill-category:hover {
+        transform: translateY(-5px);
+      }
+
+      .skill-category h3 {
+        color: #141929;
+        margin-bottom: 1rem;
+      }
+
+      .skill-list {
+        list-style: none;
+      }
+
+      .skill-list li {
+        padding: 0.5rem 0;
+        color: #666;
+      }
+
+      /* Experience Section */
+      .experience {
+        background: #f8fafc;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #64ffda;
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+      }
+
+      .timeline-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: calc(50% - 2rem);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-left: auto;
+      }
+
+      .timeline-content h3 {
+        color: #141929;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-date {
+        color: #64ffda;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .project-image {
+        height: 200px;
+        background: linear-gradient(45deg, #64ffda, #00bcd4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+      }
+
+      .project-content {
+        padding: 2rem;
+      }
+
+      .project-content h3 {
+        color: #141929;
+        margin-bottom: 1rem;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .tech-tag {
+        background: #f0f9ff;
+        color: #0369a1;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+      }
+
+      /* Contact Section */
+      .contact {
+        background: linear-gradient(135deg, #141929 0%, #1a1f3a 100%);
+        color: white;
+      }
+
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+
+      .contact-info h3 {
+        margin-bottom: 2rem;
+        color: #64ffda;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-item i {
+        margin-right: 1rem;
+        color: #64ffda;
+        width: 20px;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        margin-bottom: 0.5rem;
+        color: #64ffda;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        backdrop-filter: blur(10px);
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Footer */
+      footer {
+        background: #0f1419;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      /* Animations */
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Notification animations */
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideOutRight {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+      }
+
+      /* Form button loading state */
+      .btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 2rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2.5rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline::before {
+          left: 0;
+        }
+
+        .timeline-content {
+          width: calc(100% - 2rem);
+          margin-left: 2rem;
+        }
+
+        .contact-content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="nav-container">
+        <div class="logo">NI</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#" onclick="downloadCV()">Download CV</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Nelly Ishimwe</h1>
+          <div class="subtitle">Computer Science Student & Developer</div>
+          <p>
+            Dedicated university student with strong analytical skills and a
+            passion for achieving excellence. Experienced in programming, data
+            management, and system support with a collaborative mindset ready to
+            contribute to innovative projects.
+          </p>
+          <div class="cta-buttons">
+            <a href="#contact" class="btn btn-primary">Get In Touch</a>
+            <a href="#projects" class="btn btn-secondary">View My Work</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="floating-card">
+            <h3 style="color: #64ffda; margin-bottom: 1rem">
+              Currently Studying
+            </h3>
+            <p style="color: white">
+              🎓 Computer Science<br />📍 University of Manitoba<br />💻 Focus
+              on Programming & Analytics
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>About Me</h2>
+          <p>Getting to know the person behind the code</p>
+        </div>
+        <div class="about-content">
+          <div>
+            <div class="about-text">
+              <p>
+                Hello! I'm Nelly Ishimwe, a passionate Computer Science student
+                at the University of Manitoba with a strong foundation in
+                programming and analytical problem-solving. My journey spans
+                from Rwanda to Manitoba, bringing diverse perspectives to every
+                project I undertake.
+              </p>
+
+              <p>
+                Currently working as a Data Entry Operator and System Support
+                Representative at ESCO Ltd, I handle system troubleshooting,
+                bookkeeping, and customer support while pursuing my degree. My
+                experience includes research internships, leadership roles, and
+                athletic achievements.
+              </p>
+
+              <p>
+                I'm trilingual (English, French, Kinyarwanda) and have been
+                recognized for academic excellence, including the Best Science
+                Student Award. I'm passionate about technology's potential to
+                solve real-world problems and create meaningful impact.
+              </p>
+            </div>
+            <div class="stats">
+              <div class="stat-item">
+                <div class="stat-number">4+</div>
+                <div>Programming Languages</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div>Languages Spoken</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">2+</div>
+                <div>Years Experience</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">1</div>
+                <div>Science Award</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="floating-card">
+              <h3 style="color: #64ffda; margin-bottom: 1rem">Quick Facts</h3>
+              <p style="color: white">
+                📧 bigwinelly275@gmail.com<br />
+                📱 204-963-6139<br />
+                📍 Winnipeg, Manitoba<br />
+                🏆 Best Science Student 2022-2023<br />
+                ⚽ Former Football Team Defender
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <div class="section-title">
+          <h2>Skills & Technologies</h2>
+          <p>The tools and technologies I work with</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Programming Languages</h3>
+            <ul class="skill-list">
+              <li>Python (Advanced)</li>
+              <li>Java (Intermediate)</li>
+              <li>C++ (Beginner)</li>
+              <li>HTML & CSS</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Core Competencies</h3>
+            <ul class="skill-list">
+              <li>Data Analysis</li>
+              <li>System Support</li>
+              <li>Database Management</li>
+              <li>Problem Solving</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Soft Skills</h3>
+            <ul class="skill-list">
+              <li>Team Leadership</li>
+              <li>Communication</li>
+              <li>Project Management</li>
+              <li>Adaptability</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <ul class="skill-list">
+              <li>English (Fluent)</li>
+              <li>French (Fluent)</li>
+              <li>Kinyarwanda (Native)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+      <div class="container">
+        <div class="section-title">
+          <h2>Experience & Education</h2>
+          <p>My professional and academic journey</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Bachelor's in Computer Science</h3>
+              <div class="timeline-date">Jan 2024 - Present</div>
+              <p>
+                <strong>University of Manitoba</strong><br />
+                Majoring in Computer Science with advanced courses in
+                Mathematics and Statistics. Focusing on programming, algorithms,
+                and data structures.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Data Entry Operator & System Support</h3>
+              <div class="timeline-date">Aug 2023 - Present</div>
+              <p>
+                <strong>ESCO Ltd (Remote)</strong><br />
+                Handle system troubleshooting, bookkeeping, and customer
+                support. Manage data entry operations and provide technical
+                assistance to clients.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>High School Graduate</h3>
+              <div class="timeline-date">Jan 2020 - Aug 2023</div>
+              <p>
+                <strong>Kigali Christian School</strong><br />
+                Completed advanced courses in Mathematics, Physics, and Computer
+                Science. Awarded Best Science Student of the Year 2022-2023.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Research Intern</h3>
+              <div class="timeline-date">May 2020 - Sep 2020</div>
+              <p>
+                <strong
+                  >RASIT (Royal Academy of Science International Trust)</strong
+                ><br />
+                Conducted research on assigned countries, evaluated development
+                challenges, and formulated sustainable strategies for addressing
+                regional issues.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Projects</h2>
+          <p>Some of my notable work and achievements</p>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image">🚗</div>
+            <div class="project-content">
+              <h3>Line Follower Car Project</h3>
+              <p>
+                Led the development of an autonomous line-following robot as
+                part of the Kigali Christian School Science Club. Managed the
+                entire project lifecycle from conception to presentation.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Arduino</span>
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">Robotics</span>
+                <span class="tech-tag">Leadership</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">📊</div>
+            <div class="project-content">
+              <h3>Data Management System</h3>
+              <p>
+                Developed and maintain data entry and management systems at ESCO
+                Ltd, handling customer data and system support operations
+                efficiently.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Data Analysis</span>
+                <span class="tech-tag">System Support</span>
+                <span class="tech-tag">Customer Service</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">🔬</div>
+            <div class="project-content">
+              <h3>International Development Research</h3>
+              <p>
+                Conducted comprehensive research on various countries'
+                development challenges and formulated innovative, sustainable
+                strategies during internship at RASIT.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Research</span>
+                <span class="tech-tag">Analysis</span>
+                <span class="tech-tag">Strategy</span>
+                <span class="tech-tag">Documentation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2 style="color: white">Get In Touch</h2>
+          <p style="color: #a0a9c0">
+            Ready to discuss opportunities and collaborations
+          </p>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Let's Connect</h3>
+            <div class="contact-item">
+              <span>📧</span>
+              <span>bigwinelly275@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <span>📱</span>
+              <span>204-963-6139</span>
+            </div>
+            <div class="contact-item">
+              <span>📍</span>
+              <span>Winnipeg, Manitoba, Canada</span>
+            </div>
+            <div class="contact-item">
+              <span>🎓</span>
+              <span>University of Manitoba Student</span>
+            </div>
+            <div class="contact-item">
+              <span>💼</span>
+              <span>Available for internships and part-time opportunities</span>
+            </div>
+          </div>
+          <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your Name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your.email@example.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="What's this about?"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Your message here..."
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="align-self: flex-start"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025 Nelly Ishimwe. All rights reserved. | Computer Science
+          Student at University of Manitoba
+        </p>
+      </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.11.0/email.min.js"></script>
+
+    <script>
+      // Initialize EmailJS
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      });
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Enhanced form submission handler with EmailJS
+      function handleSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+
+        // Show loading state
+        submitButton.textContent = "Sending...";
+        submitButton.disabled = true;
+
+        // Prepare email parameters
+        const templateParams = {
+          from_name: form.name.value,
+          from_email: form.email.value,
+          subject: form.subject.value,
+          message: form.message.value,
+          to_email: "bigwinelly275@gmail.com", // Your email
+        };
+
+        // Send email using EmailJS
+        emailjs
+          .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+          .then(
+            function (response) {
+              console.log("SUCCESS!", response.status, response.text);
+
+              // Success feedback
+              submitButton.textContent = "Message Sent! ✓";
+              submitButton.style.background =
+                "linear-gradient(45deg, #4ade80, #22c55e)";
+
+              // Show success message
+              showNotification(
+                "Thank you! Your message has been sent successfully. I'll get back to you soon!",
+                "success"
+              );
+
+              // Reset form
+              form.reset();
+
+              // Reset button after delay
+              setTimeout(() => {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                submitButton.style.background = "";
+              }, 3000);
+            },
+            function (error) {
+              console.log("FAILED...", error);
+
+              // Error feedback
+              submitButton.textContent = "Failed to Send ✗";
+              submitButton.style.background =
+                "linear-gradient(45deg, #ef4444, #dc2626)";
+
+              // Show error message
+              showNotification(
+                "Sorry, there was an error sending your message. Please try emailing me directly at bigwinelly275@gmail.com",
+                "error"
+              );
+
+              // Reset button after delay
+              setTimeout(() => {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                submitButton.style.background = "";
+              }, 3000);
+            }
+          );
+      }
+
+      // Notification system
+      function showNotification(message, type) {
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${
+                  type === "success"
+                    ? "linear-gradient(45deg, #4ade80, #22c55e)"
+                    : "linear-gradient(45deg, #ef4444, #dc2626)"
+                };
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 10000;
+                max-width: 400px;
+                animation: slideInRight 0.5s ease;
+                font-weight: 500;
+            `;
+
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+          notification.style.animation = "slideOutRight 0.5s ease";
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 500);
+        }, 5000);
+      }
+
+      // CV Download function
+      function downloadCV() {
+        // In a real implementation, this would download the actual CV file
+        alert(
+          "CV download functionality would be implemented here. Please contact me directly at bigwinelly275@gmail.com for my latest resume."
+        );
+      }
+
+      // Add scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections for scroll animations
+      document.querySelectorAll("section").forEach((section) => {
+        section.style.opacity = "0";
+        section.style.transform = "translateY(30px)";
+        section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>
